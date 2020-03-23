@@ -1,4 +1,4 @@
-#Loggbok Teknikk Distansstudier
+#Loggbok Teknik Distansstudier
 
 #Gabriel Calota
 
