@@ -10,3 +10,7 @@ Arbetat med Python-projektet. Skapat en miljö för AI:n att arbeta i och Lagt i
 
 #### 25/3-2020
 Arbetat med Python-projektet. Fixat klart observation space i miljön samt programmerat själva AI:n. Gjort några midre tester på ett fåtal generationer. 
+
+#### 27/3-2020
+Arbete med Driverbot. Påbörjat hemsida med styrning genom att skapa ett vue-projekt
+Arbete med Python-projektet. Tränat en AI, skapat ett testprogram så att jag kan testa olika AI:s och jämföra olika generationer och hyperparametrar. 
