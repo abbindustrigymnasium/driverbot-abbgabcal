@@ -30,13 +30,36 @@
 </template>
 
 <script>
+import { connect } from 'mqtt'
 var mqtt = require("mqtt")
 export default {
     name: "Controller",
 
     data() {
         return {
+            clientId: "Nothing",
+            client: null,
+            options: {}
         }
+    },
+    computed: {
+
+    },
+
+    methods: {
+        connect() {
+            let Broker = this.$store.getters.GetBroker
+            this.clientId = "WebController" + Math.random().toString(16).substr(2, 8)
+            var url = "mqtt://" + Broker.adress
+            var options = {
+                port: Broker.port,
+                clientId: this.clientId,
+                username: Broker.name,
+                password: Broker.password
+            }
+            this.options = options
+        }
+
     }
 }
 
