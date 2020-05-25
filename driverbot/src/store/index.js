@@ -15,22 +15,27 @@ const mutations = {
   Set_broker(state, data) {
     state.broker = data
   },
-  
-  Save_: (state, broker) => {
+
+  Update_: (state, broker) => {
     state.broker = broker
   }
 }
 
 const actions = {
   SetBroker: ({
-    commit}, data) => {
-      commit('Set_Broker', data)
-    },
-  
-  Save: ({
-    commit}, broker) => {
-      commit('Save', broker)
-    }
+    commit
+  }, data) => {
+    commit('Set_Broker', data)
+
+  },
+
+  Update: ({
+    commit
+  }, broker) => {
+    commit('Update_', broker)
+    console.log("Broker updated")
+  }
+
 }
 
 const getters = {
