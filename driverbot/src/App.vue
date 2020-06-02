@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app>
-
+      <v-toolbar-title>Drivercontroller</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn class="fontcolour--text" color="secondary" depressed @click.stop="dialog = true">
         <span>Connection settings</span>

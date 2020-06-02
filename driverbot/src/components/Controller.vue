@@ -1,12 +1,12 @@
 <template>
     <v-container>
         <v-btn v-if="connected == false" color="red" @click="connect()">
-            Anslut
+            Connect
         </v-btn>
         <v-btn v-else color="green" disabled>
-            Ansluten till broker
+            Connected till broker
         </v-btn>
-        <v-card class="flexcard" id=ButtonCard>
+        <v-card class="flexcard" id=ButtonCard flat>
             <v-card class="white--text" flat>
                 <v-card-title v-if="connected==true">Connected to broker</v-card-title>
                 <v-card-title v-else>Not connected to broker</v-card-title>
@@ -79,10 +79,10 @@ export default {
     },
 
     methods: {
-        connect() {
+        connect() {  //Metod som ansluter till MQTT, aktiveras med "Connect"-knappen
             var ref = this
             let Broker = this.$store.getters.GetBroker
-            this.clientId = "WebController" + Math.random().toString(16).substr(2, 8)
+            this.clientId = "WebController" + Math.random().toString(16).substr(2, 8) //kontrollerns ID
             var url = "mqtt://" + Broker.adress
             var options = {
                 port: Broker.port,
@@ -92,7 +92,7 @@ export default {
             }
             this.options = options
 
-            this.client = mqtt.connect(url, options)
+            this.client = mqtt.connect(url, options) //Anropar connect-funktionen i MQQT.js biblioteket
 
 
 
@@ -122,7 +122,7 @@ export default {
                 console.log("Not connected")
             } else {
                 this.Send("motor", this.clientId + " har anslutits. ")
-                this.client.subscribe(this.options.username + '/motor/logger', {
+                this.client.subscribe(this.options.username + '/motor/logger', {  //Prenumererar på logger-topic
                     qos: 0,
                     nl: true
                 }, function (err) {
@@ -134,28 +134,28 @@ export default {
             }
         },
 
-        Send(adress, message) {
+        Send(adress, message) {  //Funktion som skickar till MQTT
             this.client.publish(this.options.username + "/" + adress, message)
             console.log("Sending " + message + " to mqtt")
         },
 
-        AddToLogger(message) {
+        AddToLogger(message) {  //Funktion som körs när ett meddelande tas emot på logger, lägger till tiden samt vad bilen gjort i logger
             var today = new Date()
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds() + ":" + today.getMilliseconds();
             var splicer = this.log.length - 1
             this.log.splice(splicer, 0, time + ":  " + message)
-            var container = document.querySelector(".LoggerStyle")
+            var container = document.querySelector(".LoggerStyle") //Denna rad samt nedanstående 2 rader gör så att loggfönstret automatiskt scrollar nedåt med hjälp av CSS
             var scrollHeight = container.scrollHeight
             container.scrollTop = scrollHeight
 
 
         },
 
-        KeyboardToggle() {
+        KeyboardToggle() { //Funktion som sätter på/av tangentbordskontroll
             if (this.Keyboard == null) {
                 this.Keyboard = true
-                window.addEventListener("keypress", e => this.KeyboardControl(e))
-            } else if (this.Keyboard == false) {
+                window.addEventListener("keypress", e => this.KeyboardControl(e)) //Sätter på tangentbordskontroll och kör funktionen Keyboardkontroll när en tangent trycks
+            } else if (this.Keyboard == false) { //Stänger av tangentbordskontroll
                 this.Keyboard = true
 
             } else {
@@ -163,7 +163,7 @@ export default {
             }
         },
 
-        KeyboardControl(e) {
+        KeyboardControl(e) { //Kollar vilken tangent som har tryckts ned och skickar den till bilen med MQTT
             if (this.Keyboard == true) {
                 let keydown = String.fromCharCode(e.keyCode)
                 if (this.connected == false) {
