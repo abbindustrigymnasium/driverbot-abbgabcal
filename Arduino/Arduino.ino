@@ -9,8 +9,8 @@ Servo servo;
 void onConnectionEstablished();
 
 EspMQTTClient client(
-  "Gabriels iPhone",                           // Wifi ssid                                }
-  "12345678",                                  // Wifi password                          }
+  "wifi SSID",                           // Wifi ssid                                }
+  "wifi password",                                  // Wifi password                          }
   "maqiatto.com",                                   // MQTT broker ip                       } 
   1883,                                             // MQTT broker port                     } 
   "gabriel.calota@abbindustrigymnasium.se",            // MQTT username                        } -- Information anges för att IOT-enheten ska anslutas till rätt MQTT-broker och nätverk.
